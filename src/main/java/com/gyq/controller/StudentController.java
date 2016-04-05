@@ -21,7 +21,8 @@ import com.gyq.model.query.StudentQuery;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
-	
+//	这是分支1
+//	就是一下切换分支后是否还可以看到
 	protected final Log log = LogFactory.getLog(getClass());
 	
 	@Resource
