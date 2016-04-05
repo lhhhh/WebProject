@@ -24,13 +24,6 @@ public class StudentController {
 	
 	protected final Log log = LogFactory.getLog(getClass());
 	
-	@Test
-	public void testLog(){
-		log.debug("write log!!");
-		log.error("this is error message!!");
-		log.warn("this is warning message!!");
-	}
-	
 	@Resource
 	private StudentDao stuDao;
 	
