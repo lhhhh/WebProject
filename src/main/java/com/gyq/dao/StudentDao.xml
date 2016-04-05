@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.gyq.dao.StudentDao">  
+	<select id="getStudent" parameterType="com.gyq.model.query.StudentQuery" resultType="com.gyq.model.Student">
+		select * from studentinfo where stuNo=#{stuNo}
+	</select>
+	
+	<select id="getAllStudent" resultType="com.gyq.model.Student">
+		select * from studentinfo;
+	</select>
+	
+	<select id="getStudents" resultType="com.gyq.model.Student">
+		select s.* from studentinfo s
+		where 1=1
+		<if test=" stuName != null and stuName != '' ">
+			and s.stuName = #{stuName}
+		</if>
+		<if test=" sex != null and sex != '' ">
+			and s.sex = #{sex}
+		</if>
+		<if test=" begindate != null and begindate != '' ">
+			and s.startingDate &gt;= #{begindate}
+		</if>
+		<if test=" enddate != null and enddate != '' ">
+			and s.startingDate &lt;= #{enddate}
+		</if>
+	</select>
+	
+	<insert id="addStudent" parameterType="com.gyq.model.Student" flushCache="true">  
+		insert into studentinfo values(#{stuNo},#{stuName},#{sex},#{age},#{idCard},#{telphone},#{startingDate})
+	</insert>
+	
+	<update id="updateStudent" parameterType="com.gyq.model.Student">  
+		update studentinfo 
+		<set>
+			<if test="stuNo != '' and stuNo != null">
+				stuNo = #{stuNo},
+			</if>
+			<if test="stuName != '' and stuName != null">
+				stuName = #{stuName},
+			</if>
+			<if test="sex != null">
+				sex = #{sex},
+			</if>
+			<if test="age != '' and age != null">
+				age = #{age},
+			</if>
+			<if test="idCard != '' and idCard != null">
+				idCard = #{idCard},
+			</if>
+			<if test="telphone != '' and telphone != null">
+				telphone = #{telphone},
+			</if>
+			<if test="startingDate != '' and startingDate != null">
+				startingDate = #{startingDate},
+			</if>
+		</set>
+		where stuNo=#{stuNo}
+	</update>  
+	
+	<delete id="deleteStudent" parameterType="String">
+		delete from studentinfo where stuNo=#{stuNo}
+	</delete>
+</mapper> 
